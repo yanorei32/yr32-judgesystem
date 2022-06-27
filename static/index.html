@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang=ja>
+	<head>
+		<meta charset=utf-8>
+		<meta name=viewport content="width=device-width, initial-scale=1.0">
+		<title>yr32 judgesystem</title>
+		<link rel=stylesheet href=style.css>
+	</head>
+	<body>
+		<header>
+			<div class=container>
+				<h1>yr32 judgesystem</h1>
+			</div>
+		</header>
+		<main>
+			<div class=container>
+				<div class=group>
+					<label for=practice-selector>
+						<h2>Practice</h2>
+					</label>
+					<select id=practice-selector></select>
+				</div>
+				<div class=group>
+					<h2>Description</h2>
+					<div id=description>loading...</div>
+				</div>
+				<div class=group>
+					<h2>Samples</h2>
+					<div id=samples>loading...</div>
+				</div>
+				<div class=group>
+					<h2>Limitations</h2>
+					Timeout: <span id=timeout-ms>loading..</span>ms
+				</div>
+				<div class=group>
+					<h2>Code</h2>
+					<code id=code-prefix>#prefix loading...</code>
+					<textarea id=code></textarea>
+					<code id=code-suffix>#suffix loading...</code>
+					<input type=submit value=Submit id=submit>
+				</div>
+				<div class=group>
+					<h2>Result</h2>
+					<table border=1>
+						<thead>
+							<tr>
+								<th>Case</th>
+								<th>Result</th>
+							</tr>
+						</thead>
+						<tbody id=results></tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div class=container>
+				Copyright &copy; 2022 yanorei32; all rights reserved.
+			</div>
+		</footer>
+		<script src=main.js></script>
+	</body>
+</html>
+
