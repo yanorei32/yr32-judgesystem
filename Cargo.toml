@@ -1,0 +1,21 @@
+[package]
+name = "judge-system"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-embed = "0.1.0"
+actix-web = "4.1.0"
+actix-web-httpauth = "0.6.0"
+bcrypt = "0.13.0"
+envy = "0.4.2"
+once_cell = "1.12.0"
+rust-embed = "6.4.0"
+serde = { version = "1.0.137", features = ["derive"]}
+serde_json = "1.0.81"
+static-files = "0.2.1"
+tokio = "1.19.2"
+ulid = "0.6.0"
+wait-timeout = "0.2.0"
