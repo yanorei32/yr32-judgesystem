@@ -3,9 +3,6 @@ let practices = false;
 const submitPressed = async () => {
 	if (!practices) return;
 
-	const results = document.getElementById('results');
-	results.innerHTML = '';
-
 	const request = JSON.stringify({
 		id: document.getElementById('practice-selector').value,
 		code: document.getElementById('code').value,
@@ -20,6 +17,9 @@ const submitPressed = async () => {
 	})
 	.then(response => response.json())
 	.then(data => {
+		const results = document.getElementById('results');
+		results.innerHTML = '';
+
 		for (const [i, result] of Object.entries(data)) {
 			const tr = document.createElement('tr');
 			const tdCase = document.createElement('td');
@@ -38,6 +38,7 @@ const submitPressed = async () => {
 const selectorChanged = () => {
 	if (!practices) return;
 	const selector = document.getElementById('practice-selector');
+	document.getElementById('is-answers-visible').checked = false;
 
 	const p = practices.find(p => p.id == selector.value);
 	document.getElementById('description').textContent = p.description;
@@ -49,6 +50,10 @@ const selectorChanged = () => {
 
 	const samples = document.getElementById('samples');
 	samples.innerHTML = '';
+
+	const results = document.getElementById('results');
+	results.innerHTML = '';
+
 	for (const [i, c] of Object.entries(p.testcases)) {
 		const sample = document.createElement('div');
 		const header = document.createElement('h3');
@@ -76,10 +81,40 @@ const selectorChanged = () => {
 		}
 
 		samples.appendChild(sample);
+
+		const tr = document.createElement('tr');
+		const tdCase = document.createElement('td');
+		tdCase.textContent = i;
+		tr.appendChild(tdCase);
+
+		const tdResult = document.createElement('td');
+		tdResult.textContent = `not-submitted`;
+		tr.appendChild(tdResult);
+		results.appendChild(tr);
 	}
 
-	document.getElementById('results').innerHTML = '';
-	document.getElementById('code').value = '';
+	const answers = document.getElementById('answers');
+	answers.innerHTML = '';
+
+	for (const [i, a] of Object.entries(p.answers)) {
+		const answer = document.createElement('div');
+		const header = document.createElement('h3');
+		header.textContent = `Answer ${i}`;
+		answer.appendChild(header);
+
+		const note = document.createElement('p');
+		note.textContent = a.note;
+		answer.appendChild(note);
+
+		const code = document.createElement('code');
+		code.textContent = a.code;
+		code.innerHTML = code.innerHTML.replaceAll('\n', '<br>');
+		answer.appendChild(code);
+
+		answers.appendChild(answer);
+	}
+
+	document.getElementById('answers-count').textContent = p.answers.length;
 };
 
 document.addEventListener('DOMContentLoaded', () => {

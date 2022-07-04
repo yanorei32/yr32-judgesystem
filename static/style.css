@@ -3,63 +3,82 @@ html, body {
 	padding: 0;
 	margin: 0;
 }
+
+h1, h2, h3, p {
+	margin: 0;
+}
+
+header {
+	background-color: #2F4056;
+	color: white;
+}
+
+main {
+	background-color: #eee;
+}
+
+footer {
+	background-color: #2F4056;
+	color: white;
+}
+
 .container {
 	margin: auto;
 	padding: 10px;
 	max-width: 1200px;
 }
-header {
-	background-color: #2F4056;
-	color: white;
-}
-h1, h2, h3, p {
-	margin: 0;
-}
-main {
-	background-color: #eee;
-}
-main .container {
-	background-color: #fff;
-	min-height: 640px;
-}
-textarea {
-	width: 100%;
-	height: 15em;
-	resize: vertical;
-	font-size: 125%;
-}
-input, select {
-	font-size: 150%;
-	width: 100%;
-	margin-top: 5px;
-}
-footer {
-	background-color: #2F4056;
-	color: white;
-}
+
 .vert-center {
 	display: inline-block;
 }
+
 .group {
 	padding-bottom: 20px;
+	margin-top: 5px;
 }
+
 code {
 	font-family: monospace;
 	display: block;
 	background-color: #eee;
 	padding: 10px;
 }
-table {
+
+main table {
 	width: 100%;
 }
-.group {
+
+main td {
+	text-align: center;
+	font-size: 200%;
+}
+
+main textarea {
+	width: 100%;
+	height: 15em;
+	resize: vertical;
+	font-size: 125%;
+}
+
+main .container {
+	background-color: #fff;
+	min-height: 640px;
+}
+
+main input[type=submit], main select {
+	font-size: 150%;
+	width: 100%;
 	margin-top: 5px;
+}
+
+#answers {
+	visibility: hidden;
+}
+
+#is-answers-visible:checked ~ #answers {
+	visibility: visible;
 }
 
 #code-prefix, #code-suffix {
 	display: none;
-}
-td {
-	text-align: center;
-	font-size: 200%;
 }

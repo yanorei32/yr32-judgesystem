@@ -40,7 +40,7 @@
 					<input type=submit value=Submit id=submit>
 				</div>
 				<div class=group>
-					<h2>Result</h2>
+					<h2>Results</h2>
 					<table border=1>
 						<thead>
 							<tr>
@@ -48,8 +48,17 @@
 								<th>Result</th>
 							</tr>
 						</thead>
-						<tbody id=results></tbody>
+						<tbody id=results>
+						</tbody>
 					</table>
+				</div>
+				<div class=group>
+					<h2>Answers (<span id=answers-count>0</span>)</h2>
+					<input type=checkbox id=is-answers-visible checked="">
+					<label for=is-answers-visible>
+						Show
+					</label>
+					<div id=answers>loading...</div>
 				</div>
 			</div>
 		</main>
@@ -61,4 +70,3 @@
 		<script src=main.js></script>
 	</body>
 </html>
-

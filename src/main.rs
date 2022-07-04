@@ -36,11 +36,23 @@ struct Practice {
     footer: String,
     timeout_ms: u64,
     testcases: Vec<Case>,
+    #[serde(default = "default_answers")]
+    answers: Vec<Answer>,
+}
+
+fn default_answers() -> Vec<Answer> {
+    Vec::new()
 }
 
 #[derive(RustEmbed)]
 #[folder = "static/"]
 struct Assets;
+
+#[derive(Deserialize, Serialize)]
+struct Answer {
+    code: String,
+    note: String,
+}
 
 #[derive(Deserialize)]
 struct Environments {
@@ -64,7 +76,7 @@ fn default_users_path() -> String {
     "/etc/users.json".to_string()
 }
 
-fn default_port() -> u16 {
+const fn default_port() -> u16 {
     8080
 }
 
@@ -142,7 +154,7 @@ async fn judge(req: web::Json<JudgeRequest>) -> actix_web::Result<HttpResponse> 
 
     JUDGE_MUTEX.get().unwrap().lock().await;
 
-    return Ok(HttpResponse::Ok().json(
+    Ok(HttpResponse::Ok().json(
         p.testcases
             .iter()
             .map(|c| {
@@ -200,7 +212,7 @@ async fn judge(req: web::Json<JudgeRequest>) -> actix_web::Result<HttpResponse> 
                 }
             })
             .collect::<Vec<JudgeResult>>(),
-    ));
+    ))
 }
 
 #[allow(clippy::unused_async)]
@@ -228,11 +240,21 @@ async fn main() -> std::io::Result<()> {
     JUDGE_MUTEX.set(Arc::new(Mutex::new(1))).unwrap_or(());
 
     PRACTICES
-        .set(serde_json::from_reader(BufReader::new(File::open(&e.practices).unwrap())).unwrap())
+        .set(
+            serde_json::from_reader(BufReader::new(
+                File::open(&e.practices).expect("Failed to open config: practices"),
+            ))
+            .unwrap(),
+        )
         .unwrap_or(());
 
     USERS
-        .set(serde_json::from_reader(BufReader::new(File::open(&e.users).unwrap())).unwrap())
+        .set(
+            serde_json::from_reader(BufReader::new(
+                File::open(&e.users).expect("Failed to open config: users"),
+            ))
+            .unwrap(),
+        )
         .unwrap_or(());
 
     HttpServer::new(|| {
