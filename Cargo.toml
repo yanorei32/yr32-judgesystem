@@ -16,6 +16,6 @@ rust-embed = "6.4.0"
 serde = { version = "1.0.138", features = ["derive"]}
 serde_json = "1.0.82"
 static-files = "0.2.3"
-tokio = "1.19.2"
+tokio = "1.20.0"
 ulid = "0.6.0"
 wait-timeout = "0.2.0"
