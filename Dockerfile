@@ -10,7 +10,7 @@ RUN cargo install cargo-credits; \
 	cp LICENSE CREDITS /usr/share/licenses/judge-system/; \
 	cargo install --path .
 
-FROM python:3.10.5-bullseye
+FROM python:3.10.6-bullseye
 
 RUN apt-get update; \
 	apt-get install -y --no-install-recommends \
