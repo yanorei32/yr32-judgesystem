@@ -1,1 +1,1 @@
-# yr32 judgesystem
+# yr32-judgesystem
