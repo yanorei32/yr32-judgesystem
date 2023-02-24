@@ -1,4 +1,4 @@
-FROM rust:1.66.1 as builder
+FROM rust:1.67.1 as builder
 MAINTAINER yanorei32
 
 WORKDIR /usr/src/judge-system
