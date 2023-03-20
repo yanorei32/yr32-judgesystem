@@ -13,7 +13,7 @@ bcrypt = "0.14.0"
 envy = "0.4.2"
 once_cell = "1.17.1"
 rust-embed = "6.6.0"
-serde = { version = "1.0.157", features = ["derive"]}
+serde = { version = "1.0.158", features = ["derive"]}
 serde_json = "1.0.94"
 static-files = "0.2.3"
 tokio = "1.26.0"
