@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 actix-embed = "0.1.0"
-actix-web = "4.3.1"
+actix-web = "4.4.0"
 actix-web-httpauth = "0.8.0"
 bcrypt = "0.15.0"
 envy = "0.4.2"
