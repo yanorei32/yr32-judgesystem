@@ -1,5 +1,4 @@
-FROM rust:1.72.0 as builder
-MAINTAINER yanorei32
+FROM rust:1.72.0-bookworm as builder
 
 WORKDIR /usr/src/judge-system
 COPY . .
@@ -10,7 +9,7 @@ RUN cargo install cargo-credits; \
 	cp LICENSE CREDITS /usr/share/licenses/judge-system/; \
 	cargo install --path .
 
-FROM python:3.11.5-bullseye
+FROM python:3.11.5-bookworm
 
 RUN apt-get update; \
 	apt-get install -y --no-install-recommends \
