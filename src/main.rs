@@ -8,9 +8,11 @@ use std::process::{Command, Stdio};
 use std::sync::Arc;
 use std::time::Duration;
 
+
+use mime_guess::from_path;
 use actix_embed::Embed;
 use actix_web::dev::ServiceRequest;
-use actix_web::{get, post, web, App, Error, HttpResponse, HttpServer};
+use actix_web::{get, post, web, App, Error, HttpResponse, HttpServer, Responder};
 use actix_web_httpauth::extractors::basic::{BasicAuth, Config as AuthConfig};
 use actix_web_httpauth::extractors::AuthenticationError;
 use actix_web_httpauth::middleware::HttpAuthentication;
@@ -46,7 +48,7 @@ async fn judge(req: web::Json<JudgeRequest>) -> actix_web::Result<HttpResponse> 
     let uuid = Ulid::new().to_string();
     let path = Path::new(&e.user_code_path).join(format!("{}_{}.py", p.id, uuid));
 
-    let Ok(mut file) =  File::create(&path) else {
+    let Ok(mut file) = File::create(&path) else {
         return Ok(HttpResponse::InternalServerError().json(Empty {}));
     };
 
@@ -65,8 +67,7 @@ async fn judge(req: web::Json<JudgeRequest>) -> actix_web::Result<HttpResponse> 
         p.testcases
             .iter()
             .map(|c| {
-                let Ok(mut proc) =
-                    Command::new("sudo")
+                let Ok(mut proc) = Command::new("sudo")
                     .arg("-u")
                     .arg(&ENVIRONMENTS.get().unwrap().userid)
                     .arg("python3")
@@ -122,7 +123,10 @@ async fn judge(req: web::Json<JudgeRequest>) -> actix_web::Result<HttpResponse> 
 }
 
 #[allow(clippy::unused_async)]
-async fn validator(req: ServiceRequest, cred: BasicAuth) -> Result<ServiceRequest, (Error, ServiceRequest)> {
+async fn validator(
+    req: ServiceRequest,
+    cred: BasicAuth,
+) -> Result<ServiceRequest, (Error, ServiceRequest)> {
     let id = cred.user_id().to_string();
     let password = cred.password().map_or("", |p| p).to_string();
     let config = req.app_data::<AuthConfig>().cloned().unwrap_or_default();
@@ -136,6 +140,25 @@ async fn validator(req: ServiceRequest, cred: BasicAuth) -> Result<ServiceReques
         Some(_) => Ok(req),
         None => Err((AuthenticationError::from(config).into(), req)),
     }
+}
+
+fn handle_embedded_file(path: &str) -> HttpResponse {
+    match Assets::get(path) {
+        Some(content) => HttpResponse::Ok()
+            .content_type(from_path(path).first_or_octet_stream().as_ref())
+            .body(content.data.into_owned()),
+        None => HttpResponse::NotFound().body("404 Not Found"),
+    }
+}
+
+#[actix_web::get("/")]
+async fn index() -> impl Responder {
+    handle_embedded_file("index.html")
+}
+
+#[actix_web::get("/{_:.*}")]
+async fn dist(path: web::Path<String>) -> impl Responder {
+    handle_embedded_file(path.as_str())
 }
 
 #[actix_web::main]
@@ -169,7 +192,8 @@ async fn main() -> std::io::Result<()> {
             .wrap(auth)
             .service(judge)
             .service(list)
-            .service(Embed::new("", &Assets).index_file("index.html"))
+            .service(index)
+            .service(dist)
     })
     .bind(("0.0.0.0", e.port))?
     .run()
