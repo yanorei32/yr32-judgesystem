@@ -43,7 +43,7 @@ dependencies = [
  "actix-service",
  "actix-utils",
  "ahash",
- "base64",
+ "base64 0.21.4",
  "bitflags 2.4.0",
  "brotli",
  "bytes",
@@ -202,7 +202,7 @@ checksum = "1d613edf08a42ccc6864c941d30fe14e1b676a77d16f1dbadc1174d065a0a775"
 dependencies = [
  "actix-utils",
  "actix-web",
- "base64",
+ "base64 0.21.4",
  "futures-core",
  "futures-util",
  "log",
@@ -288,12 +288,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9ba43ea6f343b788c8764558649e08df62f86c6ef251fdaeb1ffd010a9ae50a2"
 
 [[package]]
-name = "bcrypt"
-version = "0.15.0"
+name = "base64"
+version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28d1c9c15093eb224f0baa400f38fcd713fc1391a6f1c389d886beef146d60a3"
+checksum = "9475866fec1451be56a3c2400fd081ff546538961565ccb5b7142cbd22bc7a51"
+
+[[package]]
+name = "bcrypt"
+version = "0.15.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e65938ed058ef47d92cf8b346cc76ef48984572ade631927e9937b5ffc7662c7"
 dependencies = [
- "base64",
+ "base64 0.22.0",
  "blowfish",
  "getrandom",
  "subtle",
