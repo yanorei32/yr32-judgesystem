@@ -10,7 +10,6 @@ use std::time::Duration;
 
 
 use mime_guess::from_path;
-use actix_embed::Embed;
 use actix_web::dev::ServiceRequest;
 use actix_web::{get, post, web, App, Error, HttpResponse, HttpServer, Responder};
 use actix_web_httpauth::extractors::basic::{BasicAuth, Config as AuthConfig};
