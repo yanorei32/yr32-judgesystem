@@ -390,7 +390,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "159fa412eae48a1d94d0b9ecdb85c97ce56eb2a347c62394d3fdbf221adabc1a"
 dependencies = [
  "path-matchers",
- "path-slash",
+ "path-slash 0.1.5",
 ]
 
 [[package]]
@@ -1047,6 +1047,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "498a099351efa4becc6a19c72aa9270598e8fd274ca47052e37455241c88b696"
 
 [[package]]
+name = "path-slash"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1e91099d4268b0e11973f036e885d652fb0b21fedcf69738c627f94db6a44f42"
+
+[[package]]
 name = "percent-encoding"
 version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1396,13 +1402,13 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 
 [[package]]
 name = "static-files"
-version = "0.2.5"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f9c425c07353535ef55b45420f5a8b0a397cd9bc3d7e5236497ca0d90604aa9b"
+checksum = "e671725d0d26807c68901b7cd33fe57e290c039c4bc86f10fba2be293b72cf13"
 dependencies = [
  "change-detection",
  "mime_guess",
- "path-slash",
+ "path-slash 0.2.1",
 ]
 
 [[package]]
