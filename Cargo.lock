@@ -1402,9 +1402,9 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 
 [[package]]
 name = "static-files"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e671725d0d26807c68901b7cd33fe57e290c039c4bc86f10fba2be293b72cf13"
+checksum = "493af46ab6e8d5409eb02ced7af4bbc97643de491df7b4afcd1cd8fdcc91dc82"
 dependencies = [
  "change-detection",
  "mime_guess",
