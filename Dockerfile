@@ -1,4 +1,4 @@
-FROM rust:1.96.0-bookworm as builder
+FROM rust:1.96.1-bookworm as builder
 
 WORKDIR /usr/src/judge-system
 COPY . .
