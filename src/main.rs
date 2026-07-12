@@ -44,7 +44,7 @@ async fn judge(req: web::Json<JudgeRequest>) -> actix_web::Result<HttpResponse> 
         return Ok(HttpResponse::NotFound().json(Empty {}));
     };
 
-    let uuid = Ulid::new().to_string();
+    let uuid = Ulid::gen().to_string();
     let path = Path::new(&e.user_code_path).join(format!("{}_{}.py", p.id, uuid));
 
     let Ok(mut file) = File::create(&path) else {
