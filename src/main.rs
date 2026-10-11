@@ -97,7 +97,7 @@ async fn judge(req: web::Json<JudgeRequest>) -> actix_web::Result<HttpResponse> 
                     proc.kill().unwrap();
                     let _ = proc.wait().unwrap().code();
                     return JudgeResult::Timeout;
-                };
+                }
 
                 let mut output = String::new();
 
