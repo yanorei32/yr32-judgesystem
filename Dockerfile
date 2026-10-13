@@ -9,7 +9,7 @@ RUN cargo install cargo-credits; \
 	cp LICENSE CREDITS /usr/share/licenses/judge-system/; \
 	cargo install --path .
 
-FROM python:3.14.8-bookworm
+FROM python:3.15.0-bookworm
 
 RUN apt-get update; \
 	apt-get install -y --no-install-recommends \
